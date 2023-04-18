@@ -1,15 +1,11 @@
+mod constants;
+pub use crate::constants::*;
+
 use image::GenericImageView;
 use std::process::Command;
 use device_query::{DeviceQuery, DeviceState, Keycode};
 use colored::*;
 use std::{thread, time::Duration};
-
-const REFRESH_TIME: u64 = 10;
-const RED: (u8, u8, u8) = (255, 0, 0);
-const GREEN: (u8, u8, u8) = (0, 255, 0);
-const BLUE: (u8, u8, u8) = (0, 0, 255);
-const WHITE: (u8, u8, u8) = (255, 255, 255);
-const BLACK: (u8, u8, u8) = (0, 0, 0);
 
 fn main() {
     // Disables the display of user input
@@ -17,7 +13,7 @@ fn main() {
     no_print_input.arg("-echo");
     no_print_input.status().expect("failed to execute command");
     // Play the selected level
-    let path_img = String::from("levels/1.png");
+    let path_img = String::from("levels/1-Basics/1.png");
     play_level(&path_img);
     // Allow user input to be displayed (To reset to default)
     let mut print_input = Command::new("stty");
