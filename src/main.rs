@@ -18,7 +18,9 @@ fn main() {
     // Open the Menu
     let path_img = main_menu();
     // Play the selected level
-    play_level(&path_img);
+    if path_img != "exit" {
+        play_level(&path_img);
+    }
     // Allow user input to be displayed (To reset to default)
     let mut print_input = Command::new("stty");
     print_input.arg("echo");

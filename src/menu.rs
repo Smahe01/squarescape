@@ -24,6 +24,10 @@ pub fn main_menu() -> String {
         .icon("-");
     let choice_category = category_menu.show(); // `choice` is a Vec<usize> containing the chosen indices
 
+    if choice_category.len() == 0 {
+        return "exit".to_string();
+    }
+
     // Level Menu
     let filename = format!("levels/{}/list.txt", category_vec[choice_category[0]]);
     let file = File::open(filename).unwrap();
@@ -39,6 +43,10 @@ pub fn main_menu() -> String {
     let mut level_menu = youchoose::Menu::new(v_list_level.iter())
         .icon("");
     let choice_level = level_menu.show();
+
+    if choice_level.len() == 0 {
+        return "exit".to_string();
+    }
 
     let choice_split = v_list_level[choice_level[0]].split(" ");
     let mut level_vec: Vec<&str> = Vec::new();
