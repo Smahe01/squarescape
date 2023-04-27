@@ -7,16 +7,15 @@ use std::io;
 
 pub fn title_screen() -> io::Result<()> {
     println!(r"
-    ███████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗ ███████╗███████╗ ██████╗ █████╗ ██████╗ ███████╗
-    ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝
-    ███████╗██║   ██║██║   ██║███████║██████╔╝█████╗  ███████╗██║     ███████║██████╔╝█████╗
-    ╚════██║██║▄▄ ██║██║   ██║██╔══██║██╔══██╗██╔══╝  ╚════██║██║     ██╔══██║██╔═══╝ ██╔══╝
-    ███████║╚██████╔╝╚██████╔╝██║  ██║██║  ██║███████╗███████║╚██████╗██║  ██║██║     ███████╗
-    ╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝
-                                            by Saioche
+███████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗ ███████╗███████╗ ██████╗ █████╗ ██████╗ ███████╗
+██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝
+███████╗██║   ██║██║   ██║███████║██████╔╝█████╗  ███████╗██║     ███████║██████╔╝█████╗
+╚════██║██║▄▄ ██║██║   ██║██╔══██║██╔══██╗██╔══╝  ╚════██║██║     ██╔══██║██╔═══╝ ██╔══╝
+███████║╚██████╔╝╚██████╔╝██║  ██║██║  ██║███████╗███████║╚██████╗██║  ██║██║     ███████╗
+╚══════╝ ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝
+                                        by Saioche
 
-Press enter to continue :
-");
+Press enter to continue :");
     let mut buffer = String::new();
     let stdin = io::stdin(); // We get `Stdin` here.
     stdin.read_line(&mut buffer)?;
@@ -38,13 +37,14 @@ pub fn main_menu() -> String {
     for i in category_split {
         category_vec.push(i);
     }
+    category_vec.push("Exit");
 
     // Category Menu
     let mut category_menu = youchoose::Menu::new(category_vec.iter())
         .icon("-");
     let choice_category = category_menu.show(); // `choice` is a Vec<usize> containing the chosen indices
 
-    if choice_category.len() == 0 {
+    if choice_category.len() == 0 || category_vec[choice_category[0]] == "Exit"{
         return "exit".to_string();
     }
 
@@ -59,6 +59,7 @@ pub fn main_menu() -> String {
         let line = line.unwrap();
         v_list_level.push(line);
     }
+    v_list_level.push("Back".to_string());
 
     let mut level_menu = youchoose::Menu::new(v_list_level.iter())
         .icon("");
@@ -66,6 +67,9 @@ pub fn main_menu() -> String {
 
     if choice_level.len() == 0 {
         return "exit".to_string();
+    }
+    if v_list_level[choice_level[0]] == "Back" {
+        return "back_in_menu".to_string();
     }
 
     let choice_split = v_list_level[choice_level[0]].split(" ");

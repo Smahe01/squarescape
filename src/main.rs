@@ -17,10 +17,13 @@ fn main() {
     no_print_input.status().expect("failed to execute command");
     // Open the Menu
     let _unused = title_screen();
-    let path_img = main_menu();
-    // Play the selected level
-    if path_img != "exit" {
-        play_level(&path_img);
+    loop {
+        let path_img = main_menu();
+        match path_img.as_str() {
+            "exit" => break,
+            "back_in_menu" => {},
+            _ => play_level(&path_img)
+        }
     }
     // Allow user input to be displayed (To reset to default)
     let mut print_input = Command::new("stty");
