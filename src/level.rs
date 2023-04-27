@@ -7,6 +7,7 @@ use device_query::{DeviceQuery, DeviceState, Keycode};
 use colored::*;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
+use std::{thread, time::Duration};
 
 pub fn play_level(path_img: &String) {
     let dimension: (u32,u32) = get_dimension(&path_img);
@@ -29,10 +30,14 @@ pub fn play_level(path_img: &String) {
         if keys.contains(&Keycode::Right) {
             right(&mut v_rgb, &dimension, &mut game_over, &mut win);
         }
-        if game_over {
-            clear_screen();
-            println!("You lost !");
+        if keys.contains(&Keycode::Q) {
             break;
+        }
+        if game_over {
+            v_rgb = read_image(&path_img);
+            thread::sleep(Duration::from_millis(DIED_TIME));
+            print_level(&v_rgb, dimension.0, dimension.1);
+            game_over = false;
         }
         if win {
             clear_screen();

@@ -1,4 +1,5 @@
 pub const REFRESH_TIME: u64 = 10;
+pub const DIED_TIME: u64 = 100;
 pub const RED: (u8, u8, u8) = (255, 0, 0);
 pub const GREEN: (u8, u8, u8) = (0, 255, 0);
 pub const BLUE: (u8, u8, u8) = (0, 0, 255);

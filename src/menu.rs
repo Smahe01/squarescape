@@ -38,10 +38,8 @@ pub fn main_menu() -> String {
         category_vec.push(i);
     }
     category_vec.push("Exit");
-
     // Category Menu
-    let mut category_menu = youchoose::Menu::new(category_vec.iter())
-        .icon("-");
+    let mut category_menu = youchoose::Menu::new(category_vec.iter()).icon("-");
     let choice_category = category_menu.show(); // `choice` is a Vec<usize> containing the chosen indices
 
     if choice_category.len() == 0 || category_vec[choice_category[0]] == "Exit"{
@@ -61,8 +59,7 @@ pub fn main_menu() -> String {
     }
     v_list_level.push("Back".to_string());
 
-    let mut level_menu = youchoose::Menu::new(v_list_level.iter())
-        .icon("");
+    let mut level_menu = youchoose::Menu::new(v_list_level.iter()).icon("");
     let choice_level = level_menu.show();
 
     if choice_level.len() == 0 {
