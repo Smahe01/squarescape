@@ -4,7 +4,7 @@ mod menu;
 
 mod level;
 
-use crate::menu::main_menu;
+use crate::menu::{title_screen, main_menu};
 use crate::level::play_level;
 
 use std::process::Command;
@@ -16,6 +16,7 @@ fn main() {
     no_print_input.arg("-echo");
     no_print_input.status().expect("failed to execute command");
     // Open the Menu
+    let _unused = title_screen();
     let path_img = main_menu();
     // Play the selected level
     if path_img != "exit" {
