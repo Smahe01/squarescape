@@ -1,5 +1,6 @@
 use crate::constants::*;
 use crate::direction::*;
+use crate::menu::win_screen;
 
 use image::GenericImageView;
 use std::process::Command;
@@ -8,6 +9,7 @@ use colored::*;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 use std::{thread, time::Duration};
+
 
 pub fn play_level(path_img: &String) {
     let dimension: (u32,u32) = get_dimension(&path_img);
@@ -30,7 +32,7 @@ pub fn play_level(path_img: &String) {
         if keys.contains(&Keycode::Right) {
             right(&mut v_rgb, &dimension, &mut game_over, &mut win);
         }
-        if keys.contains(&Keycode::Q) {
+        if keys.contains(&Keycode::Q) || keys.contains(&Keycode::A) {
             break;
         }
         if game_over {
@@ -42,10 +44,9 @@ pub fn play_level(path_img: &String) {
         if win {
             clear_screen();
             valide_level(&path_img);
-            println!("Level passed !");
+            win_screen();
             break;
         }
-        // println!("Is A pressed? {}", keys.contains(&Keycode::Up));
     }
 }
 
@@ -66,7 +67,7 @@ fn read_image(path_img: &String) ->  Vec<(u8, u8, u8)> {
 }
 
 /// Clear the terminal
-fn clear_screen() {
+pub fn clear_screen() {
     let mut clear = if cfg!(target_os = "windows") {
         Command::new("cls")
     } else {
@@ -129,5 +130,4 @@ fn valide_level(path_img: &String) {
     for i in v_list_level {
         writeln!(&mut file, "{}", i).unwrap();
     }
-
 }

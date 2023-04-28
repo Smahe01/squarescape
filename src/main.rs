@@ -5,7 +5,7 @@ mod menu;
 mod level;
 
 use crate::menu::{title_screen, main_menu};
-use crate::level::play_level;
+use crate::level::{play_level, clear_screen};
 
 use std::process::Command;
 
@@ -16,7 +16,7 @@ fn main() {
     no_print_input.arg("-echo");
     no_print_input.status().expect("failed to execute command");
     // Open the Menu
-    let _unused = title_screen();
+    title_screen();
     loop {
         let path_img = main_menu();
         match path_img.as_str() {
@@ -25,6 +25,7 @@ fn main() {
             _ => play_level(&path_img)
         }
     }
+    clear_screen();
     // Allow user input to be displayed (To reset to default)
     let mut print_input = Command::new("stty");
     print_input.arg("echo");

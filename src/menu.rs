@@ -4,8 +4,14 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::io;
 
+fn wait_for_enter() -> io::Result<()> {
+    let mut buffer = String::new();
+    let stdin = io::stdin(); // We get `Stdin` here.
+    stdin.read_line(&mut buffer)?;
+    Ok(())
+}
 
-pub fn title_screen() -> io::Result<()> {
+pub fn title_screen() {
     println!(r"
 ███████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗ ███████╗███████╗ ██████╗ █████╗ ██████╗ ███████╗
 ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝
@@ -16,10 +22,7 @@ pub fn title_screen() -> io::Result<()> {
                                         by Saioche
 
 Press enter to continue :");
-    let mut buffer = String::new();
-    let stdin = io::stdin(); // We get `Stdin` here.
-    stdin.read_line(&mut buffer)?;
-    Ok(())
+    let _unused = wait_for_enter();
 }
 
 
@@ -75,4 +78,14 @@ pub fn main_menu() -> String {
         level_vec.push(i);
     }
     return format!("levels/{}/{}.png", category_vec[choice_category[0]], level_vec[1]);
+}
+
+
+pub fn win_screen(){
+    println!(r"
+█   ██▀ █ █ ██▀ █     ▄▀▀ ▄▀▄ █▄ ▄█ █▀▄ █   ██▀ ▀█▀ ██▀ █▀▄   █
+█▄▄ █▄▄ ▀▄▀ █▄▄ █▄▄   ▀▄▄ ▀▄▀ █ ▀ █ █▀  █▄▄ █▄▄  █  █▄▄ █▄▀   ▄
+
+Press enter to continue :");
+    let _unused = wait_for_enter();
 }
