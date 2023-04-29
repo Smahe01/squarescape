@@ -35,6 +35,10 @@ pub fn play_level(path_img: &String) {
         if keys.contains(&Keycode::Q) || keys.contains(&Keycode::A) {
             break;
         }
+        if keys.contains(&Keycode::R) {
+            v_rgb = read_image(&path_img);
+            print_level(&v_rgb, dimension.0, dimension.1);
+        }
         if game_over {
             v_rgb = read_image(&path_img);
             thread::sleep(Duration::from_millis(DIED_TIME));
