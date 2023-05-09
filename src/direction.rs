@@ -15,8 +15,8 @@ pub fn up(v_rgb: &mut Vec<(u8, u8, u8)>, dimension: &(u32, u32), game_over: &mut
         } else {
             next_index = index - width;
         }
-        // White
-        if v_rgb[next_index] == WHITE {
+        // White or Green
+        if v_rgb[next_index] == WHITE || v_rgb[next_index] == GREEN {
             v_rgb[index] = WHITE;
             v_rgb[next_index] = GREEN;
             index = next_index;
@@ -59,8 +59,8 @@ pub fn down(v_rgb: &mut Vec<(u8, u8, u8)>, dimension: &(u32, u32), game_over: &m
         } else {
             next_index = index + width;
         }
-        // White
-        if v_rgb[next_index] == WHITE {
+        // White or Green
+        if v_rgb[next_index] == WHITE || v_rgb[next_index] == GREEN {
             v_rgb[index] = WHITE;
             v_rgb[next_index] = GREEN;
             index = next_index;
@@ -104,8 +104,8 @@ pub fn left(v_rgb: &mut Vec<(u8, u8, u8)>, dimension: &(u32, u32), game_over: &m
         } else {
             next_index = index - 1;
         }
-        // White
-        if v_rgb[next_index] == WHITE {
+        // White or Green
+        if v_rgb[next_index] == WHITE || v_rgb[next_index] == GREEN  {
             v_rgb[index] = WHITE;
             v_rgb[next_index] = GREEN;
             index = next_index;
@@ -148,8 +148,8 @@ pub fn right(v_rgb: &mut Vec<(u8, u8, u8)>, dimension: &(u32, u32), game_over: &
         } else {
             next_index = index + 1;
         }
-        // White
-        if v_rgb[next_index] == WHITE {
+        // White or Green
+        if v_rgb[next_index] == WHITE || v_rgb[next_index] == GREEN {
             v_rgb[index] = WHITE;
             v_rgb[next_index] = GREEN;
             index = next_index;
