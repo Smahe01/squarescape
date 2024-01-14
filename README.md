@@ -8,7 +8,7 @@ A little terminal game I made to learn Rust 🦀
 
 You control the green square 🟩, your goal is to reach the blue square 🟦.
 
-### The square
+### The squares
 
 - 🟩 You
 - 🟦 The exit
@@ -21,7 +21,9 @@ You control the green square 🟩, your goal is to reach the blue square 🟦.
 - Press "r" to restart
 - Press "q" to exit the program
 
-### Overview
+### Preview
+
+![GIF montrant un niveau du jeu](preview.GIF)
 
 ## Installation
 
@@ -47,4 +49,3 @@ mv target/release/squarescape .
 ```
 ./squarescape
 ```
-
